@@ -27,14 +27,29 @@ class _HomeState extends State<Home> {
       body: ListView.builder(
           itemCount: todoList.length,
           itemBuilder: (BuildContext context, int index) {
-          return Dismissible(
+            return Dismissible(
               key: Key(todoList[index]),
               child: Card(
-                child: ListTile(title: Text(todoList[index])),
-              )
-          );
-          }
-      ),
+                child: ListTile(
+                  title: Text(todoList[index]),
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete_forever),
+                    color: Colors.deepOrange,
+                    onPressed: () {
+                      setState(() {
+                        todoList.removeAt(index);
+                      });
+                    },
+                  ),
+                ),
+              ),
+              onDismissed: (direction) {
+                setState(() {
+                  todoList.removeAt(index);
+                });
+              },
+            );
+          }),
     );
   }
 }
