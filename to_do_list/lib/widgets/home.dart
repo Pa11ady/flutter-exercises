@@ -9,6 +9,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List todoList = [];
+  String _userTodo = '';
 
   @override
   void initState() {
@@ -34,7 +35,7 @@ class _HomeState extends State<Home> {
                   title: Text(todoList[index]),
                   trailing: IconButton(
                     icon: Icon(Icons.delete_forever),
-                    color: Colors.deepOrange,
+                    color: Colors.blue,
                     onPressed: () {
                       setState(() {
                         todoList.removeAt(index);
@@ -50,6 +51,33 @@ class _HomeState extends State<Home> {
               },
             );
           }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext builder) {
+                return AlertDialog(
+                  title: Text('Добавить пункт'),
+                  content: TextField(
+                    onChanged: (String value) {
+                      _userTodo = value;
+                    },
+                  ),
+                  actions: [
+                    ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            todoList.add(_userTodo);
+                          });
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('Добавить'))
+                  ],
+                );
+              });
+        },
+        child: Icon(Icons.add_box, color: Colors.white),
+      ),
     );
   }
 }
