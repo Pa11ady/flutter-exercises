@@ -13,19 +13,36 @@ class Profile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 30),
-              _AvatarWidget(),
-              SizedBox(height: 30),
-              _UserNameWidget(),
-              SizedBox(height: 10),
-              _UserPhoneWidget(),
-              SizedBox(height: 10),
-              _NickNameWidget(),
+              _UserInfo()
             ],
           ),
         ));
   }
 }
+
+class _UserInfo extends StatelessWidget {
+  const _UserInfo({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: Column(
+        children: [
+          SizedBox(height: 30),
+          _AvatarWidget(),
+          SizedBox(height: 30),
+          _UserNameWidget(),
+          SizedBox(height: 10),
+          _UserPhoneWidget(),
+          SizedBox(height: 10),
+          _NickNameWidget(),
+        ],
+      ),
+    );
+  }
+}
+
 
 class _NickNameWidget extends StatelessWidget {
   const _NickNameWidget({
@@ -34,7 +51,9 @@ class _NickNameWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('@petrov777');
+    return Text('@petrov777',
+        style: TextStyle(
+            color: Colors.grey, fontSize: 17));
   }
 }
 
@@ -45,7 +64,9 @@ class _UserNameWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('Ivan Petrov');
+    return Text('Ivan Petrov',
+        style: TextStyle(
+            color: Colors.black, fontSize: 25, fontWeight: FontWeight.w600));
   }
 }
 
@@ -56,7 +77,9 @@ class _UserPhoneWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('+7(777)777 77 77');
+    return Text('+7(777)777 77 77',
+        style: TextStyle(
+            color: Colors.grey, fontSize: 15));
   }
 }
 
