@@ -6,6 +6,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey,
         appBar: AppBar(title: Text('Настройка')),
         body: Container(
           width: double.infinity,
@@ -13,12 +14,42 @@ class Profile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _UserInfo()
+              _UserInfo(),
+              SizedBox(height: 30),
+              _MenuBlock()
             ],
           ),
         ));
   }
 }
+
+class _MenuBlock extends StatelessWidget {
+  const _MenuBlock({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      width: double.infinity,
+      child: Column(children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+            Icon(Icons.favorite_border_outlined),
+            SizedBox(width: 15),
+            Expanded(child: Text('Избранное')),
+            //SizedBox(width: 15),
+            Icon(Icons.chevron_right),
+
+          ],),
+        )
+      ],)
+    );
+  }
+}
+
 
 class _UserInfo extends StatelessWidget {
   const _UserInfo({Key? key}) : super(key: key);
@@ -26,6 +57,7 @@ class _UserInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       color: Colors.white,
       child: Column(
         children: [
