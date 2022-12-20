@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
+  final List<MenuRowData> menuRow = [
+    MenuRowData(Icons.favorite, 'Избраное'),
+    MenuRowData(Icons.call, 'Звонки'),
+    MenuRowData(Icons.computer, 'Устройства'),
+    MenuRowData(Icons.folder, 'Папка с чатами')
+  ];
+
+  Profile();
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +20,20 @@ class Profile extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [_UserInfo(), SizedBox(height: 30), _MenuBlock()],
+            children: [
+              _UserInfo(),
+              SizedBox(height: 30),
+              _MenuBlock(menuRow: menuRow)
+            ],
           ),
         ));
   }
 }
 
 class _MenuBlock extends StatelessWidget {
-  const _MenuBlock({Key? key}) : super(key: key);
+  final List<MenuRowData> menuRow;
+
+  const _MenuBlock({Key? key, required this.menuRow}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,22 +41,14 @@ class _MenuBlock extends StatelessWidget {
         color: Colors.white,
         width: double.infinity,
         child: Column(
-          children: [
-            _MenuRow(icon: Icons.favorite, text: 'Избраное'),
-            _MenuRow(icon: Icons.call, text: 'Звонки'),
-            _MenuRow(icon: Icons.computer, text: 'Устройства'),
-            _MenuRow(icon: Icons.folder, text: 'Папка с чатами'),
-          ],
-        ));
+            children: menuRow.map((data) => _MenuRow(data: data)).toList()));
   }
 }
 
 class _MenuRow extends StatelessWidget {
-  final IconData icon;
-  final String text;
+  final MenuRowData data;
 
-  const _MenuRow({Key? key, required this.icon, required this.text})
-      : super(key: key);
+  const _MenuRow({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +57,9 @@ class _MenuRow extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          Icon(icon),
+          Icon(data.icon),
           SizedBox(width: 15),
-          Expanded(child: Text(text)),
+          Expanded(child: Text(data.text)),
           //SizedBox(width: 15),
           Icon(Icons.chevron_right),
         ],
@@ -133,4 +138,11 @@ class _AvatarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(width: 100, height: 100, child: Placeholder());
   }
+}
+
+class MenuRowData {
+  final IconData icon;
+  final String text;
+
+  MenuRowData(this.icon, this.text);
 }
