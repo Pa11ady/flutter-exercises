@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
 class Profile extends StatelessWidget {
-  final List<MenuRowData> menuRow = [
+  final List<MenuRowData> menuRow1 = [
     MenuRowData(Icons.favorite, 'Избраное'),
     MenuRowData(Icons.call, 'Звонки'),
     MenuRowData(Icons.computer, 'Устройства'),
     MenuRowData(Icons.folder, 'Папка с чатами')
+  ];
+  final List<MenuRowData> menuRow2 = [
+    MenuRowData(Icons.notifications, 'Уведомления и звуки'),
+    MenuRowData(Icons.lock, 'Конфиденциальность'),
+    MenuRowData(Icons.sd_storage, 'Данные и память'),
+    MenuRowData(Icons.brush, 'Оформление'),
+    MenuRowData(Icons.language, 'Язык')
   ];
 
   Profile();
@@ -23,7 +30,9 @@ class Profile extends StatelessWidget {
             children: [
               _UserInfo(),
               SizedBox(height: 30),
-              _MenuBlock(menuRow: menuRow)
+              _MenuBlock(menuRow: menuRow1),
+              SizedBox(height: 30),
+              _MenuBlock(menuRow: menuRow2)
             ],
           ),
         ));
@@ -60,8 +69,7 @@ class _MenuRow extends StatelessWidget {
           Icon(data.icon),
           SizedBox(width: 15),
           Expanded(child: Text(data.text)),
-          //SizedBox(width: 15),
-          Icon(Icons.chevron_right),
+          Icon(Icons.chevron_right)
         ],
       ),
     );
